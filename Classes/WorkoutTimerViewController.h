@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface WorkoutTimerViewController : UIViewController {
-
+	AVAudioPlayer *audioPlayer;
 }
+
+- (IBAction) play;
+- (IBAction) stop;
 
 @end
 

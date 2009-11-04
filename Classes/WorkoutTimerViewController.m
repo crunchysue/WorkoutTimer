@@ -11,6 +11,24 @@
 @implementation WorkoutTimerViewController
 
 
+- (void) play {
+	NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/audiofile.mp3", [[NSBundle mainBundle] resourcePath]]];
+	
+	NSError *error;
+	audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	audioPlayer.numberOfLoops = -1;
+	
+	if (audioPlayer == nil)
+		NSLog([error description]);
+	else
+		[audioPlayer play];
+
+}
+
+- (void) stop {
+	
+	[audioPlayer stop];
+}
 
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -59,6 +77,7 @@
 
 
 - (void)dealloc {
+	[audioPlayer release];
     [super dealloc];
 }
 
