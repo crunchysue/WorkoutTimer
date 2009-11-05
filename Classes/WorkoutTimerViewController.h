@@ -11,10 +11,12 @@
 
 @interface WorkoutTimerViewController : UIViewController {
 	AVAudioPlayer *audioPlayer;
+	NSTimer *theTimer;
 }
 
-- (IBAction) play;
-- (IBAction) stop;
+- (void) playWorkMusic: (NSTimer *)timer;
+- (IBAction) startTimer;
+- (IBAction) stopTimer;
 
 @end
 

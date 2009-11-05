@@ -8,10 +8,19 @@
 
 #import "WorkoutTimerViewController.h"
 
+const int TIMER_INTERVAL = 5.0;
+
 @implementation WorkoutTimerViewController
 
 
-- (void) play {
+// this starts the timer now, instead of starting the song.
+- (IBAction) startTimer {
+	[self stopTimer];
+	theTimer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(playWorkMusic:) userInfo:nil repeats:NO];
+	[theTimer retain];
+}
+
+- (void) playWorkMusic: (NSTimer *) timer {
 	NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/audiofile.mp3", [[NSBundle mainBundle] resourcePath]]];
 	
 	NSError *error;
@@ -19,49 +28,21 @@
 	audioPlayer.numberOfLoops = -1;
 	
 	if (audioPlayer == nil)
-		NSLog([error description]);
+		NSLog(@"Error: %@", error);
 	else
 		[audioPlayer play];
-
 }
 
-- (void) stop {
+- (IBAction) stopTimer {
 	
-	[audioPlayer stop];
+	if (theTimer) {
+		[theTimer invalidate];
+		[theTimer release];
+		theTimer = nil;
+	}
 }
 
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-*/
-
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -77,6 +58,11 @@
 
 
 - (void)dealloc {
+	if (theTimer) {
+		[theTimer invalidate];
+		[theTimer release];
+		theTimer = nil;
+	}
 	[audioPlayer release];
     [super dealloc];
 }
