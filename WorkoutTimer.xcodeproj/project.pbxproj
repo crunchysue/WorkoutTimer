@@ -182,6 +182,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos3.1.2]" = "iPhone Developer: Sue Brown (KFMST6PZZ9)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -189,6 +191,8 @@
 				GCC_PREFIX_HEADER = WorkoutTimer_Prefix.pch;
 				INFOPLIST_FILE = "WorkoutTimer-Info.plist";
 				PRODUCT_NAME = WorkoutTimer;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos3.1.2]" = "447E8D58-DADE-49BF-8141-A25421E8E127";
 			};
 			name = Debug;
 		};
