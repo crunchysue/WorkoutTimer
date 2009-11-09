@@ -14,7 +14,7 @@
 	NSTimer *theTimer;
 }
 
-- (void) playWorkMusic: (NSTimer *)timer;
+- (void) toggleMusic: (NSTimer *)timer;
 - (IBAction) startTimer;
 - (IBAction) stopTimer;
 
