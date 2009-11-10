@@ -8,16 +8,31 @@
 
 #import "WorkoutTimerViewController.h"
 
-const int TIMER_INTERVAL = 2.0;
+int iTimerInterval = 15;
 static int iMusicIsPlaying = 0; // cycles between 0 (off) and 1 (on) - effectively a boolean
 
+
 @implementation WorkoutTimerViewController
+
+@synthesize intervalLabel;
+@synthesize intervalSlider;
+
+
+
+- (IBAction) setInterval: (UISlider *) sender {	
+	 
+	int val = (int) sender.value;
+	intervalLabel.text = [NSString stringWithFormat:@"%u", val];
+	
+	iTimerInterval = val;
+
+}
 
 
 // this starts the timer now, instead of starting the song.
 - (IBAction) startTimer {
 	//[self stopTimer];
-	theTimer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(toggleMusic:) userInfo:nil repeats:YES];
+	theTimer = [NSTimer scheduledTimerWithTimeInterval:iTimerInterval target:self selector:@selector(toggleMusic:) userInfo:nil repeats:YES];
 	[theTimer retain];
 }
 
@@ -67,7 +82,11 @@ static int iMusicIsPlaying = 0; // cycles between 0 (off) and 1 (on) - effective
 	audioPlayer.numberOfLoops = -1;
 	
 	if (error)
-		NSLog(@"Error Description Here: %@", error.description);
+		NSLog(@"Error Description Here: %@", error.description);	
+	
+	intervalLabel.text = [NSString stringWithFormat:@"%u", iTimerInterval];
+						  
+						  
 }
 
 - (void)viewDidUnload {

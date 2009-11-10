@@ -12,11 +12,17 @@
 @interface WorkoutTimerViewController : UIViewController {
 	AVAudioPlayer *audioPlayer;
 	NSTimer *theTimer;
+	UISlider *intervalSlider;
+	UILabel *intervalLabel;
 }
+
+@property (nonatomic, retain) IBOutlet UISlider *intervalSlider;
+@property (nonatomic, retain) IBOutlet UILabel *intervalLabel;
 
 - (void) toggleMusic: (NSTimer *)timer;
 - (IBAction) startTimer;
 - (IBAction) stopTimer;
+- (IBAction) setInterval: (UISlider *) sender;
 
 @end
 
